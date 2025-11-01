@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(160deg, #e0f7fa, #fce4ec);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 0;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .navbar-brand, .navbar-nav li a {
+            color: white !important;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            color: #333;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .col-md-3 {
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .book-card {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 12px;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            width: 180px;
+            height: 360px; /* fixed card height */
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+        }
+
+        .book-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            background-color: #f0f0f0;
+            padding: 4px;
+        }
+
+        /* Book name text overflow fix */
+        .book-card p {
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 8px;
+            color: #333;
+            height: 36px; /* fixed height for 2 lines */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            word-wrap: break-word;
+        }
+
+        /* Author and other info overflow fix */
+        .book-card h4 {
+            color: #555;
+            margin: 3px 0;
+            font-size: 13px;
+            height: 18px; /* single line */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand">📚 My Book Recommender</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/recommend">Recommend</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 style="font-size:45px; margin-top:20px;">Top 50 Books</h1>
+        </div>
+
+        {% for i in range(book_name|length) %}
+        <div class="col-md-3">
+            <div class="book-card">
+                <img src="{{ image[i] }}" alt="Book Image">
+                <p>{{ book_name[i] }}</p>
+                <h4>{{ author[i] }}</h4>
+                <h4>Votes: {{ votes[i] }}</h4>
+                <h4>Rating: {{ rating[i] }}</h4>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>
